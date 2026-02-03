@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundRecycle : MonoBehaviour
+public class GroundChunkQueue : MonoBehaviour
 {
   public Transform player;
-  public GameObject groundPrefab;
+  public float chunkLength = 20f;
 
-  public int poolSize = 5;          // Always 5 chunks
-  public float chunkLength = 20f;   // Length of one chunk
+  // Drag your 5 chunks here in Inspector (0,1,2,3,4)
+  public List<Transform> chunks = new List<Transform>();
 
-  private List<GameObject> groundPool = new List<GameObject>();
-  private float spawnZ = 0f;
+  private Queue<Transform> chunkQueue = new Queue<Transform>();
+
+  private float nextSpawnZ;
 
   void Start()
   {
-    // Spawn initial pool of 5 chunks
-    for (int i = 0; i < poolSize; i++)
+    // Put chunks into queue in correct order
+    foreach (Transform chunk in chunks)
     {
-      SpawnChunk();
+      chunkQueue.Enqueue(chunk);
     }
+
+    // Set nextSpawnZ after last chunk
+    nextSpawnZ = chunks[chunks.Count - 1].position.z + chunkLength;
   }
 
   void Update()
@@ -27,33 +31,30 @@ public class GroundRecycle : MonoBehaviour
     RecycleChunks();
   }
 
-  // ✅ Spawn a chunk from prefab
-  void SpawnChunk()
-  {
-    GameObject chunk = Instantiate(groundPrefab);
-    chunk.transform.position = new Vector3(0, 0, spawnZ);
-
-    groundPool.Add(chunk);
-
-    spawnZ += chunkLength;
-  }
-
-  // ✅ Recycle the oldest chunk
   void RecycleChunks()
   {
-    // If player moved beyond first chunk
-    if (player.position.z - groundPool[0].transform.position.z > chunkLength)
+    Transform firstChunk = chunkQueue.Peek();
+
+    // If player passed the first chunk completely
+    if (player.position.z > firstChunk.position.z + chunkLength)
     {
-      GameObject oldChunk = groundPool[0];
-      groundPool.RemoveAt(0);
+      // Remove first chunk from queue
+      Transform oldChunk = chunkQueue.Dequeue();
 
-      // Move chunk to front
-      oldChunk.transform.position = new Vector3(0, 0, spawnZ);
+      // Move it to the end
+      oldChunk.position = new Vector3(
+          oldChunk.position.x,
+          oldChunk.position.y,
+          nextSpawnZ
+      );
 
-      groundPool.Add(oldChunk);
+      // Update next spawn position
+      nextSpawnZ += chunkLength;
 
-      spawnZ += chunkLength;
+      // Add chunk back to queue end
+      chunkQueue.Enqueue(oldChunk);
     }
   }
 }
+
 
