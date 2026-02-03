@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - lane1
+  - lane2
+  - lane3
+  - plane1
+  - plane2
   layers:
   - Default
   - TransparentFX
