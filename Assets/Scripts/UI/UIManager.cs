@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public void StartButton()
     {
         SkipMenu=true;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
     public void QuitButton()
