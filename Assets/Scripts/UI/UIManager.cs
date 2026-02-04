@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]GameObject SettingsPannel;
+    [SerializeField]GameObject PausePannel;
     [SerializeField]GameObject MainMenuPannel;
     [SerializeField]GameObject CountdownPannel;
     [SerializeField]TMPro.TMP_Text CountdownText;
@@ -39,9 +39,9 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
-    public void ShowSettings()
+    public void ShowPause()
     {
-        SettingsPannel.SetActive(true);
+        PausePannel.SetActive(true);
         //Time.timeScale=0f;
     }
     public void ResumeButton()
@@ -50,12 +50,12 @@ public class UIManager : MonoBehaviour
     }
     public void HomeButton()
     {   
-        SettingsPannel.SetActive(false);
+        PausePannel.SetActive(false);
         MainMenuPannel.SetActive(true);
     }
     IEnumerator ResumeCountdown()
     {
-        SettingsPannel.SetActive(false);
+        PausePannel.SetActive(false);
         CountdownPannel.SetActive(true);
         CountdownText.text="3";
         yield return new WaitForSeconds(1f);
