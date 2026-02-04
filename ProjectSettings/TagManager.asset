@@ -10,6 +10,7 @@ TagManager:
   - lane3
   - plane1
   - plane2
+  - Obstacle
   layers:
   - Default
   - TransparentFX
