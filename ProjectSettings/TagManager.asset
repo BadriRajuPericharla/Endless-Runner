@@ -11,6 +11,7 @@ TagManager:
   - plane1
   - plane2
   - Obstacle
+  - RunPower
   layers:
   - Default
   - TransparentFX
