@@ -190,7 +190,7 @@ MonoBehaviour:
   - {fileID: 705182881}
   - {fileID: 403532899}
   - {fileID: 1564773026}
-  player: {fileID: 0}
+  player: {fileID: 589245899}
   spawnZ: 10
   spawnY: 0.5
 --- !u!1 &403532898
@@ -560,8 +560,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 6
-  laneDistance: 3
+  laneDistance: 2
   laneChangeSpeed: 10
+  currentLane: 0
 --- !u!54 &589245900
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -894,7 +895,7 @@ MonoBehaviour:
   - {fileID: 1638814239}
   - {fileID: 1140859291}
   - {fileID: 503142617}
-  player: {fileID: 0}
+  player: {fileID: 589245899}
   spawnZ: 10
   spawnY: 0.5
 --- !u!1 &978137618

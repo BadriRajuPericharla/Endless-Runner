@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public float laneDistance = 3f;
     public float laneChangeSpeed = 10f;
-    private int currentLane = 0;
+    public int currentLane = 0;
 
     void Start()
     {

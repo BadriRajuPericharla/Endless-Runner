@@ -20,9 +20,9 @@ public class ObstacleSpawner : MonoBehaviour
                 Destroy(child.gameObject);
         }
 
+        int laneIndex = player.currentLane+1;
         
-        
-        int laneIndex = Random.Range(0, lanes.Length);
+        laneIndex = Mathf.Clamp(laneIndex, 0, lanes.Length - 1);
 
        
         GameObject obs = Instantiate(obstaclePrefab, transform);
