@@ -25,8 +25,6 @@ public class GroundRecycle : MonoBehaviour
   void Update()
   {
     Transform firstChunk = chunkQueue.Peek();
-
-    // ✅ If player passed the first chunk
     if (player.position.z > firstChunk.position.z + chunkLength)
     {
       RecycleChunk();

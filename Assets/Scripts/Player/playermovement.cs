@@ -13,7 +13,6 @@ public class playermovement : MonoBehaviour
   private float targetX = 0f;
 
   private Rigidbody rb;
-  private bool isGrounded = true;
 
   void Start()
   {
@@ -38,9 +37,7 @@ public class playermovement : MonoBehaviour
     Vector3 newPos = transform.position;
     newPos.x = Mathf.Lerp(transform.position.x, targetX, smoothSideSpeed * Time.deltaTime);
     transform.position = newPos;
-
-    // ✅ Jump when pressing E
-    if (Input.GetKeyDown(KeyCode.E) && isGrounded)
+    if (Input.GetKeyDown(KeyCode.Space))
     {
       Jump();
     }
@@ -48,17 +45,10 @@ public class playermovement : MonoBehaviour
 
   void Jump()
   {
-    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+    rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
     rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    isGrounded = false;
   }
-  private void OnCollisionEnter(Collision collision)
-  {
-    if (collision.gameObject.CompareTag("Ground"))
-    {
-      isGrounded = true;
-    }
-  }
+
 }
 
 
