@@ -11,13 +11,9 @@ public class CoinMagnet : MonoBehaviour
         if (other.CompareTag("MagnetArea"))
         {
             Transform player = other.transform.parent;
-
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                player.position,
-                speed * Time.deltaTime
-            );
+            transform.position = Vector3.MoveTowards(transform.position,player.position,speed * Time.deltaTime);
         }
     }
 }
 
+  
