@@ -20,7 +20,7 @@ public class Magnet : MonoBehaviour
         if (other.CompareTag("Magnet"))
         {
             StartCoroutine(MagnetRoutine());
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 

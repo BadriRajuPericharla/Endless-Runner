@@ -23,7 +23,7 @@ public class SuperRun : MonoBehaviour
         if (collision.gameObject.tag == "RunPower")
         {
             StartCoroutine(superrun());
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
     IEnumerator superrun()
