@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
@@ -16,7 +17,7 @@ public class CoinSpawner : MonoBehaviour
 
     public float jumpHeight = 2f;
 
-    public void SpawnCoinLine(int obstacleLane)
+    public void SpawnCoinLine(List<int> obstacleLanes)
     {
         
         foreach (Transform child in transform)
@@ -28,7 +29,7 @@ public class CoinSpawner : MonoBehaviour
        
         int laneIndex = Random.Range(0, lanes.Length);
 
-        bool sameLaneAsObstacle = laneIndex == obstacleLane;
+        bool sameLaneAsObstacle = obstacleLanes.Contains(laneIndex);
 
         for (int i = 0; i < coinCount; i++)
         {

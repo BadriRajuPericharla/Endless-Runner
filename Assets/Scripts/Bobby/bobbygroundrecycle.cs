@@ -27,7 +27,7 @@ public class bobbygroundrecycle : MonoBehaviour
         Vector3 moveAmount = Vector3.forward * groundLength * 3f;
         transform.position += moveAmount;
         obstacleSpawner.SpawnObstacle(playerSript.currentLane);
-        coinSpawner.SpawnCoinLine(obstacleSpawner.obstacleSpawnlane);
+        coinSpawner.SpawnCoinLine(obstacleSpawner.obstacleSpawnlanes);
     }
 
 }
