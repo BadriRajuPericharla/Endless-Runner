@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ObstacleSpawner : MonoBehaviour
 {
     public GameObject obstaclePrefab;
@@ -9,7 +8,7 @@ public class ObstacleSpawner : MonoBehaviour
     public float spawnZ = 10f;  
     public float spawnY = 0.5f; 
         
-
+    public Transform ObstacleSpawnPoint;
     public void SpawnObstacle()
     {
         
@@ -20,14 +19,22 @@ public class ObstacleSpawner : MonoBehaviour
                 Destroy(child.gameObject);
         }
 
+        int laneIndex = player.currentLane+1;
         
-        
-        int laneIndex = Random.Range(0, lanes.Length);
+        laneIndex = Mathf.Clamp(laneIndex, 0, lanes.Length - 1);
 
+         Vector3 spawnPos = new Vector3(
+            lanes[laneIndex].position.x,             
+            spawnY,                                  
+            ObstacleSpawnPoint.position.z + spawnZ    
+        );
        
-        GameObject obs = Instantiate(obstaclePrefab, transform);
+        GameObject obs = Instantiate(
+            obstaclePrefab,
+            spawnPos,
+            Quaternion.identity
+        );
 
-       
-        obs.transform.localPosition = new Vector3(lanes[laneIndex].localPosition.x, spawnY,spawnZ);
+         obs.transform.SetParent(transform);
     }
 }

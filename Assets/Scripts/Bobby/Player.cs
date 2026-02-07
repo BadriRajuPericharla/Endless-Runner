@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public float laneDistance = 3f;
     public float laneChangeSpeed = 10f;
-    private int currentLane = 0;
+    public int currentLane = 0;
 
     void Start()
     {
@@ -58,11 +58,19 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-{
-    if (collision.gameObject.CompareTag("Ground"))
     {
-        isGrounded = true;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
     }
-}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Coin")
+        {
+            Destroy(other.gameObject);
+        }
+    }
 
 }
