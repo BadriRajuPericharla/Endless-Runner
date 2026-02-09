@@ -6,6 +6,7 @@ public class ObstacleSpawner : MonoBehaviour
     public Transform[] lanes;   
     public float spawnZ = 10f;  
     public float spawnY = 0.5f; 
+    
         
     public Transform ObstacleSpawnPoint;
 

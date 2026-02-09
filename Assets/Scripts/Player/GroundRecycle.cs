@@ -9,6 +9,8 @@ public class GroundRecycle : MonoBehaviour
   public List<Transform> chunks;
   public float chunkLength = 10f;
 
+  public Vector3[] initialChunkPositions;
+
   private Queue<Transform> chunkQueue;
 
   void Start()
@@ -33,26 +35,35 @@ public class GroundRecycle : MonoBehaviour
 
   void RecycleChunk()
   {
-    // Remove first chunk
     Transform oldChunk = chunkQueue.Dequeue();
 
-    // Find last chunk position
     Transform lastChunk = null;
     foreach (Transform chunk in chunkQueue)
     {
       lastChunk = chunk;
     }
 
-    // Move old chunk after last chunk
+
     oldChunk.position = new Vector3(
         oldChunk.position.x,
         oldChunk.position.y,
         lastChunk.position.z + chunkLength
     );
 
-    // Add chunk back to queue
     chunkQueue.Enqueue(oldChunk);
   }
+
+  public void ResetGround()
+    {
+        chunkQueue.Clear();
+
+        for (int i = 0; i < chunks.Count; i++)
+        {
+            chunks[i].position = initialChunkPositions[i];
+            chunkQueue.Enqueue(chunks[i]);
+        }
+    }
 }
+
 
 

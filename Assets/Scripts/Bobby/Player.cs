@@ -25,15 +25,15 @@ public class Player : MonoBehaviour
        
        
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             currentLane--;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             currentLane++;
 
         currentLane = Mathf.Clamp(currentLane, -1, 1);
 
-        if ((Input.GetKeyDown(KeyCode.Space)&&isGrounded)||Input.GetKeyDown(KeyCode.UpArrow))
+        if ((Input.GetKey(KeyCode.Space)&&isGrounded)||Input.GetKey(KeyCode.UpArrow))
             Jump();
     }
 

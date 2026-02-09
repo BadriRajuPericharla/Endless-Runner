@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SuperRun : MonoBehaviour
 {
-    public Player player;
+    public playermovement player;
     [SerializeField]float SpeedMultiplier=2f;
     [SerializeField]float Duration=5f;
     public float fadeAmount=0.5f;
+    public GameObject Player;
     float Original;
     Material mat;
     
@@ -16,6 +18,8 @@ public class SuperRun : MonoBehaviour
     {
         mat=GetComponent<Renderer>().material;
         Original=mat.color.a;
+
+        
     }
     
     void OnTriggerEnter(Collider collision)
@@ -28,10 +32,14 @@ public class SuperRun : MonoBehaviour
     }
     IEnumerator superrun()
     {
-        player.speed*=SpeedMultiplier;
+        player.forwardSpeed*=SpeedMultiplier;
         Color c=mat.color;
         c.a = fadeAmount;
         mat.color = c;
+        Player.GetComponent<Rigidbody>().isKinematic=true;
+
+        
+        Debug.Log("Trigger on");
         
         yield return new WaitForSeconds(Duration-2f);
         mat.color=Color.red;
@@ -44,8 +52,13 @@ public class SuperRun : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         mat.color=Color.red;
         yield return new WaitForSeconds(0.2f);
+        Player.GetComponent<Rigidbody>().isKinematic=false;
+
+       
+
+
         mat.color=c;
-        player.speed/=SpeedMultiplier;
+        player.forwardSpeed/=SpeedMultiplier;
         c.a=Original;
         mat.color=c;
     } 

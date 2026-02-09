@@ -2,22 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManger : MonoBehaviour
+
+[CreateAssetMenu(menuName = "Demo/LevelConfig")]
+public class LevelManger : ScriptableObject
 {
-    [SerializeField]GameObject LevelsPannel;
-    public void Beginner()
-    {
-        PlayerPrefs.SetInt("Level",0);
-        LevelsPannel.SetActive(false);
-    }
-    public void Intermediate()
-    {
-        PlayerPrefs.SetInt("Level",1);
-        LevelsPannel.SetActive(false);
-    }
-    public void Difficult()
-    {
-        PlayerPrefs.SetInt("Level",2);
-        LevelsPannel.SetActive(false);
-    }
+    //SCRIPTABLE OBJECTS
+    public int maxHealth;
+    public int maxStrength;
 }
