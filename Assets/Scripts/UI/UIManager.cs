@@ -1,5 +1,6 @@
 
 using System.Collections;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,30 +11,78 @@ public class UIManager : MonoBehaviour
     [SerializeField]GameObject CountdownPannel;
     [SerializeField]TMPro.TMP_Text CountdownText;
     [SerializeField]GameObject SettingsPannel;
+    public GameObject LevelsPannel;
+
+    public playermovement player;
+    
     static bool SkipMenu=false;
+    static bool SkipLevelPanel = false;
+
+    
+    
+    
+    
     void Start()
     {
-        if (SkipMenu)
-        {
-            MainMenuPannel.SetActive(false);
-            SkipMenu=false;
-        }
-        else
-        {
-            MainMenuPannel.SetActive(true);
-            //Time.timeScale=0f;
-        }
+    Time.timeScale = 0f;
+
+    
+    if (!SkipMenu)
+    {
+        MainMenuPannel.SetActive(true);
+        return;
+        
     }
+
+    MainMenuPannel.SetActive(false);
+    SkipMenu = false;
+
+    
+    if (SkipLevelPanel)
+    {
+        LevelsPannel.SetActive(false);
+        SkipLevelPanel = false;
+        Time.timeScale = 1f;
+    }
+    else
+    {
+        LevelsPannel.SetActive(true);
+    }
+    }
+
 
     
     void Update()
     {
         
     }
+
+    public void Beginner()
+    {
+        PlayerPrefs.SetInt("Level",0);
+        LevelsPannel.SetActive(false);
+        Time.timeScale=1f;
+    }
+    public void Intermediate()
+    {
+        PlayerPrefs.SetInt("Level",1);
+        LevelsPannel.SetActive(false);
+        Time.timeScale=1f;
+    }
+    public void Difficult()
+    {
+        PlayerPrefs.SetInt("Level",2);
+        LevelsPannel.SetActive(false);
+        Time.timeScale=1f;
+    }
+
     public void StartButton()
     {
         SkipMenu=true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+        
+     
 
     }
     public void QuitButton()
@@ -43,11 +92,12 @@ public class UIManager : MonoBehaviour
     public void ShowPause()
     {
         PausePannel.SetActive(true);
-        //Time.timeScale=0f;
+        Time.timeScale=0f;
     }
     public void ResumeButton()
     {
         StartCoroutine(ResumeCountdown());
+        
     }
     public void HomeButton()
     {   
@@ -62,10 +112,24 @@ public class UIManager : MonoBehaviour
     {
         SettingsPannel.SetActive(true);
     }
+    public void Restart()
+    
+    {
+        SkipMenu = true;  
+        SkipLevelPanel = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    
+
+    }
+
+    
+
     IEnumerator ResumeCountdown()
     {
         PausePannel.SetActive(false);
         CountdownPannel.SetActive(true);
+        player.enabled=false;
+        Time.timeScale=1f;
         CountdownText.text="3";
         yield return new WaitForSeconds(1f);
         CountdownText.text="2";
@@ -73,6 +137,9 @@ public class UIManager : MonoBehaviour
         CountdownText.text="1";
         yield return new WaitForSeconds(1f);
         CountdownPannel.SetActive(false);
-        //Time.timeScale=1f;
+        player.enabled=true;
+        
+        
     }
+    
 }

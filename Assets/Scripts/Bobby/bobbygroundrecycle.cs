@@ -8,7 +8,7 @@ public class bobbygroundrecycle : MonoBehaviour
     public ObstacleSpawner obstacleSpawner;
     public Transform player;      
 
-    public Player playerSript;
+    public playermovement playerSript;
     
     public float groundLength = 20f; 
     
@@ -26,8 +26,18 @@ public class bobbygroundrecycle : MonoBehaviour
     {
         Vector3 moveAmount = Vector3.forward * groundLength * 3f;
         transform.position += moveAmount;
-        obstacleSpawner.SpawnObstacle(playerSript.currentLane);
+
+        int PlayerLane = GetplayerLane();
+
+        obstacleSpawner.SpawnObstacle(PlayerLane);
         coinSpawner.SpawnCoinLine(obstacleSpawner.obstacleSpawnlanes);
     }
 
+    int GetplayerLane()
+    {
+        if(playerSript.targetX>0) return 2;
+        if(playerSript.targetX<0) return 0;
+        return 1;
+
+    }
 }
