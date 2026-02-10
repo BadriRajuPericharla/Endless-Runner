@@ -147,8 +147,9 @@ public class UIManager : MonoBehaviour
     }
     public void FinalGameUpdation()
     {
-        GameOver_Coins.text=ScoreCalculation.FinalCoins.ToString();
-        GameOver_Score.text=ScoreCalculation.FinalScore.ToString();
+        GameOver_Coins.text = "Coins: " + ScoreCalculation.FinalCoins;
+        GameOver_Score.text = "Score: " + ScoreCalculation.FinalScore;
+
     }
     
 }
